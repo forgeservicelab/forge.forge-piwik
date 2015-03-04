@@ -37,13 +37,13 @@ Example Usage
 $ ansible-galaxy install -r requirements.yml
 ````
 
-3. Check the inventory file and make sure that your server instance is correctly indicated there
+3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, put the server certificate corresponding forgeservicelab.fi.key into ./roles/forge_ssl/files/forgeservicelab.fi.key
 
 ````
-$ ansible-playbook -i inventory
+$ ansible-playbook -i inventory site.yml
 ````
 
-4. Go to your server https://[ip address]/piwik with the browser using https and then finalize piwik installation.
+4. Go to your server https://[ip address]/piwik with the browserand then finalize piwik installation.
 
 License
 -------
