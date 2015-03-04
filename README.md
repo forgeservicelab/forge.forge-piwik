@@ -11,20 +11,23 @@ An Ubuntu instance is provisioned and ready for ssh connections.
 Variables
 --------------
 
-group_vars
-	remote_user: ubuntu    # the user that has sudo rights used to install things
-	ansible_ssh_user: ubuntu   # the user that has ssh access to the target machine
-  
+--- group_vars
+remote_user: ubuntu        - the user that has sudo rights used to install things
+ansible_ssh_user: ubuntu   - the user that has ssh access to the target machine
+sslcert: '/etc/ssl/forgeservicelab.fi.crt'
+sslchain: '/etc/ssl/forgeservicelab.fi.crt.chain'
+sslkey: '/etc/ssl/forgeservicelab.fi.key'
+
+--- extra command line parameter for the playbook
 ip_range - defines the IP range where the web browser access to piwik is allowed from
 
 Dependencies
 ------------
 
 inventory     - file that contains your server's ip address
-
-ansible-piwik - role that creates default piwik installation
-forge_ssl     - role that adds forge server certificats
-piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apahce http site conf
+roles/ansible-piwik - role that creates default piwik installation
+roles/forge_ssl     - role that adds forge server certificats
+roles/piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apahce http site conf
 
 
 Example Usage
@@ -38,7 +41,7 @@ Example Usage
 $ ansible-galaxy install -r requirements.yml
 ````
 
-3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, put the server certificate corresponding forgeservicelab.fi.key into ./roles/forge_ssl/files/forgeservicelab.fi.key. Set the ip_range extra variable to be the address where you want to have access to piwik from
+3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, put the server certificate corresponding forgeservicelab.fi.key into ./roles/forge_ssl/files/forgeservicelab.fi.key and check the group_vars/all.yml has information about the certificate files. Set the ip_range extra variable to be the address where you want to have access to piwik from
 
 ````
 $ ansible-playbook -i inventory site.yml --extra-vars "ip_range=83.150.108.249"
