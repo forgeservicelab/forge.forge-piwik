@@ -1,0 +1,11 @@
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/ansible-piwik.git
+  path: roles/
+  name: ansible-piwik
+
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/forge_ssl.git
+  path: roles/
+  name: forge_ssl
+
+- src: git+ssh://gitlab@git.forgeservicelab.fi:10022/ansible-roles/piwik-ssl.git
+  path: roles/
+  name: piwik-ssl
