@@ -15,6 +15,7 @@ group_vars
 	remote_user: ubuntu    # the user that has sudo rights used to install things
 	ansible_ssh_user: ubuntu   # the user that has ssh access to the target machine
   
+ip_range - defines the IP range where the web browser access to piwik is allowed from
 
 Dependencies
 ------------
@@ -37,13 +38,13 @@ Example Usage
 $ ansible-galaxy install -r requirements.yml
 ````
 
-3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, put the server certificate corresponding forgeservicelab.fi.key into ./roles/forge_ssl/files/forgeservicelab.fi.key
+3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, put the server certificate corresponding forgeservicelab.fi.key into ./roles/forge_ssl/files/forgeservicelab.fi.key. Set the ip_range extra variable to be the address where you want to have access to piwik from
 
 ````
-$ ansible-playbook -i inventory site.yml
+$ ansible-playbook -i inventory site.yml --extra-vars "ip_range=83.150.108.249"
 ````
 
-4. Go to your server https://[ip address]/piwik with the browserand then finalize piwik installation.
+4. Go to your server https://[ip address]/piwik with the browserand then finalize piwik installation. Please note! You can only access piwik from your defined ip_range address
 
 License
 -------
