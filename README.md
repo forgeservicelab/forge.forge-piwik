@@ -12,22 +12,24 @@ Variables
 --------------
 
 --- group_vars
-remote_user: ubuntu        - the user that has sudo rights used to install things
-ansible_ssh_user: ubuntu   - the user that has ssh access to the target machine
-sslcert: '/etc/ssl/forgeservicelab.fi.crt'
-sslchain: '/etc/ssl/forgeservicelab.fi.crt.chain'
-sslkey: '/etc/ssl/forgeservicelab.fi.key'
+
+* remote_user: ubuntu        - the user that has sudo rights used to install things
+* ansible_ssh_user: ubuntu   - the user that has ssh access to the target machine
+* sslcert: '/etc/ssl/forgeservicelab.fi.crt'
+* sslchain: '/etc/ssl/forgeservicelab.fi.crt.chain'
+* sslkey: '/etc/ssl/forgeservicelab.fi.key'
 
 --- extra command line parameter for the playbook
-ip_range - defines the IP range where the web browser access to piwik is allowed from
+
+* ip_range - defines the IP range where the web browser access to piwik is allowed from
 
 Dependencies
 ------------
 
-inventory     - file that contains your server's ip address
-roles/ansible-piwik - role that creates default piwik installation
-roles/forge_ssl     - role that adds forge server certificats
-roles/piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apahce http site conf
+* inventory     - file that contains your server's ip address
+* roles/ansible-piwik - role that creates default piwik installation
+* roles/forge_ssl     - role that adds forge server certificats
+* roles/piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apahce http site conf
 
 
 Example Usage
