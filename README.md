@@ -30,14 +30,14 @@ inventory     - file that contains your targets machines ip address and username
 roles/ansible-piwik - role that creates default piwik installation
 roles/forge_ssl     - role that adds forge server certificats
 roles/piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apache http site conf
-requirements.yml    - contains roles
+
 
 Example Usage
 ----------------
 
 1. Create the virtual machine and have access to it as ubuntu user. If you have ssh access to targets with different username then modify the inventory file accordingly.
 
-2. Install dependendcies. Note! You might want to install server certificates in your own way and comment out the forge_ssl role from requirements.yml since that is the role that installs FORGE Service Lab server certificates.
+2. Install dependendcies
 
 ````
 $ ansible-galaxy install -r requirements.yml
