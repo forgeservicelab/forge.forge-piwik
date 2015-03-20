@@ -1,53 +1,57 @@
 Name
 =========
 
-forge-piwik is a playbook that installs piwik analytics solution for apache web server. Piwik site configuration for apache is created and enables ssl connectios to piwik. The playbook also installs forge ssl certificates for the web servers.
+forge-piwik is a playbook that installs piwik analytics solution for apache web server. Piwik site configuration for apache is created and enables ssl connectios to piwik. The playbook also installs ssl server certificates for apache.
 
 Requirements
 ------------
 
-An Ubuntu instance is provisioned and ready for ssh connections.
+An Ubuntu instance is provisioned and ready for ssh connections and ability to sudo.
 
 Variables
 --------------
 
---- group_vars
-remote_user: ubuntu        - the user that has sudo rights used to install things
-ansible_ssh_user: ubuntu   - the user that has ssh access to the target machine
-sslcert: '/etc/ssl/forgeservicelab.fi.crt'
-sslchain: '/etc/ssl/forgeservicelab.fi.crt.chain'
-sslkey: '/etc/ssl/forgeservicelab.fi.key'
+--- group_vars/all.yml
 
---- extra command line parameter for the playbook
-ip_range - defines the IP range where the web browser access to piwik is allowed from
+````
+apache:
+  allow_ip: "83.150.108.249" # Allow http connections from
+  sslcert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+  sslkey: '/etc/ssl/private/ssl-cert-snakeoil.key'
+  # sslchain: '/etc/ssl/forgeservicela1b.fi.crt.chain'
+````
+
+Note! There is corresponding yml file for each target e.g. development, testing, production
 
 Dependencies
 ------------
 
-inventory     - file that contains your server's ip address
+inventory     - file that contains your targets machines ip address and usernames
 roles/ansible-piwik - role that creates default piwik installation
 roles/forge_ssl     - role that adds forge server certificats
-roles/piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apahce http site conf
-
+roles/piwik-ssl     - role that reconfigures piwik for ssl connections and disables default apache http site conf
+requirements.yml    - contains roles
 
 Example Usage
 ----------------
 
-1. Create the virtual machine and have access to it as ubuntu user. Or change the group_vars to comply with the usernames you use.
+1. Create the virtual machine and have access to it as ubuntu user. If you have ssh access to targets with different username then modify the inventory file accordingly.
 
-2. Install dependendent roles
+2. Install dependendcies. Note! You might want to install server certificates in your own way and comment out the forge_ssl role from requirements.yml since that is the role that installs FORGE Service Lab server certificates.
 
 ````
 $ ansible-galaxy install -r requirements.yml
 ````
 
-3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, put the server certificate corresponding forgeservicelab.fi.key into ./roles/forge_ssl/files/forgeservicelab.fi.key and check the group_vars/all.yml has information about the certificate files. Set the ip_range extra variable to be the address where you want to have access to piwik from
+3. Check the inventory file and make sure that your server instance is correctly indicated there. Also, have the server certificate corresponding key file in ./forgeservicelab.fi.key. Check that the name and location of your server certificates is correct in ./group_vars/all.yml (and corresponding target machines conf files). Set the allow_ip variable so that apache can be configured to allow connections to piwik from this address.
 
 ````
-$ ansible-playbook -i inventory site.yml --extra-vars "ip_range=83.150.108.249"
+$ ansible-playbook -i inventory site.yml -e "targets=all"         or
+$ ansible-playbook -i inventory site.yml -e "targets=development" or 
+$ ansible-playbook -i inventory site.yml -e "targets=production"
 ````
 
-4. Go to your server https://[ip address]/piwik with the browserand then finalize piwik installation. Please note! You can only access piwik from your defined ip_range address
+4. Go to your server https://[ip address]/piwik with the browserand then finalize piwik installation. Please note! You can only access piwik from your defined allow_ip address
 
 License
 -------

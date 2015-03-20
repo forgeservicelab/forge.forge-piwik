@@ -1,2 +1,9 @@
-[piwik]
-ip-193-166-25-156.hosts.forgeservicelab.fi
+[development]
+193.166.25.75 ansible_ssh_user=ubuntu remote_user=ubuntu
+
+[testing]
+193.166.25.75 ansible_ssh_user=ubuntu remote_user=ubuntu
+
+[production]
+analytics.forgeservicelab.fi ansible_ssh_user=ubuntu remote_user=ubuntu
+
