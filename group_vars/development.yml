@@ -1,5 +1,6 @@
 # Default variables for development targets, change these if you will
 apache:
+  server_name: "193.166.25.75" # ServerName e.g. myserver.domain.com
   allow_ip: "83.150.108.249" # Allow http connections from
   sslcert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
   sslkey: '/etc/ssl/private/ssl-cert-snakeoil.key'

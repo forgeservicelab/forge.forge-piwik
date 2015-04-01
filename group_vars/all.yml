@@ -1,6 +1,7 @@
 # Default variables for all targets, change these if you will
 apache: 
-  allow_ip: "83.150.108.249" # Allow http connections from
+  server_name: "localhost" # ServerName e.g. myserver.domain.com
+  allow_ip: "83.150.108.249" # Allow http connections from DIGILE VPN and Nagios
   sslcert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
   sslkey: '/etc/ssl/private/ssl-cert-snakeoil.key'
   # sslchain: '/etc/ssl/forgeservicela1b.fi.crt.chain'

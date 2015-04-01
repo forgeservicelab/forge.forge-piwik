@@ -1,6 +1,7 @@
 # Default variables for production targets, change these if you will
 apache:
-  allow_ip: "83.150.108.249" # Allow http connections from
+  server_name: "analytics.forgeservicelab.fi"
+  allow_ip: "83.150.108.249 193.166.24.126" # Allow http connections from DIGILE, Nagios
   sslcert: '/etc/ssl/forgeservicelab.fi.crt'
   sslchain: '/etc/ssl/forgeservicelab.fi.crt.chain'
   sslkey: '/etc/ssl/forgeservicelab.fi.key'
