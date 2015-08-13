@@ -56,7 +56,7 @@ $ ansible-playbook -i inventory site.yml -e "targets=production"
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
